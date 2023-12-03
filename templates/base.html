@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     {% block head %}
     <meta charset="utf-8">
@@ -9,6 +10,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" type="text/css">
     {% endblock %}
 </head>
+
 <body>
     {% for message in get_flashed_messages() %}
     <div class="alert">{{ message }}</div>
@@ -20,11 +22,17 @@
     <nav>
         <ul>
             <li><a href="{{ url_for('index') }}">Home</a></li>
+            {% if current_user.is_authenticated %}
+                <li><a href="{{ url_for('settings') }}">Settings</a></li>
+                <li><a href="{{ url_for('logout') }}">Logout</a></li>
+            {% else %}
+                <li><a href="{{ url_for('login') }}">Login</a></li>
+            {% endif %}
         </ul>
     </nav>
     {% block content %}{% endblock %}
     <footer>
-        <small>&copy; 2018 <a href="http://helloflask.com/book/3">HelloFlask</a></small>
+        <small>&copy; 2023 <a href="http://helloflask.com/book/3">Jimmy Wen</a></small>
     </footer>
 </body>
 </html>
