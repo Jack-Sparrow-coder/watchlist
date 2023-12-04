@@ -47,6 +47,7 @@ footer {
     height: 100px;
 }
 
+/* 导航栏 */
 nav ul {
     list-style-type: none;
     margin: 0;
@@ -71,6 +72,7 @@ nav li a:hover {
     background-color: #111;
 }
 
+/* 链接 */
 .float-right {
     float: right;
 }
@@ -128,6 +130,7 @@ input[name=year] {
     border-radius: 5px;
 }
 
+/* 让表单中的删除按钮和旁边的编辑链接排成一行 */
 .inline-form {
     display: inline;
 }

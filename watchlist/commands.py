@@ -4,22 +4,22 @@ from watchlist import app, db
 from watchlist.models import User, Movie
 
 
-@app.cli.command()
-@click.option('--drop', is_flag=True, help='Create after drop.')
+@app.cli.command()  # 注册为命令
+@click.option('--drop', is_flag=True, help='Create after drop.')  # 设置选项
 def initdb(drop):
     """Initialize the database."""
-    if drop:
+    if drop:  # 判断是否输入选项
         db.drop_all()
     db.create_all()
-    click.echo('Initialized database.')
+    click.echo('Initialized database.')  # 输出提示信息
 
 
 @app.cli.command()
 def forge():
     """Generate fake data."""
     db.create_all()
-
-    name = 'Grey Li'
+    # 全局变量
+    name = 'Jack Sparrow'
     movies = [
         {'title': 'My Neighbor Totoro', 'year': '1988'},
         {'title': 'Dead Poets Society', 'year': '1989'},
@@ -45,7 +45,7 @@ def forge():
 
 @app.cli.command()
 @click.option('--username', prompt=True, help='The username used to login.')
-@click.option('--password', prompt=True, hide_input=True, confirmation_prompt=True, help='The password used to login.')
+@click.option('--password', prompt=True, hide_input=False, confirmation_prompt=True, help='The password used to login.')
 def admin(username, password):
     """Create user."""
     db.create_all()

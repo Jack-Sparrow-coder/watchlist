@@ -33,31 +33,31 @@ def index():
 def edit(movie_id):
     movie = Movie.query.get_or_404(movie_id)
 
-    if request.method == 'POST':
+    if request.method == 'POST':  # 处理编辑表单的提交请求
         title = request.form['title']
         year = request.form['year']
 
-        if not title or not year or len(year) != 4 or len(title) > 60:
+        if not title or not year or len(year) != 4 or len(title) > 60:  # 服务器端追加认证
             flash('Invalid input.')
-            return redirect(url_for('edit', movie_id=movie_id))
+            return redirect(url_for('edit', movie_id=movie_id))  # 重定向编辑界面
 
-        movie.title = title
-        movie.year = year
-        db.session.commit()
+        movie.title = title  # 更新标题
+        movie.year = year  # 更新年份
+        db.session.commit()  # 提交数据库会话
         flash('Item updated.')
-        return redirect(url_for('index'))
+        return redirect(url_for('index'))  # 重定向主页
 
-    return render_template('edit.html', movie=movie)
+    return render_template('edit.html', movie=movie)  # 传入被编辑的电影记录
 
 
 @app.route('/movie/delete/<int:movie_id>', methods=['POST'])
 @login_required
 def delete(movie_id):
-    movie = Movie.query.get_or_404(movie_id)
-    db.session.delete(movie)
-    db.session.commit()
+    movie = Movie.query.get_or_404(movie_id)  # 获取电影记录
+    db.session.delete(movie)  # 删除电影记录
+    db.session.commit()  # 提交数据库会话
     flash('Item deleted.')
-    return redirect(url_for('index'))
+    return redirect(url_for('index'))  # 重定向主页
 
 
 @app.route('/settings', methods=['GET', 'POST'])

@@ -32,7 +32,7 @@ login_manager.login_view = 'login'
 # login_manager.login_message = 'Your custom message'
 
 
-@app.context_processor
+@app.context_processor  # 模板上下文处理函数
 def inject_user():
     from watchlist.models import User
     user = User.query.first()
