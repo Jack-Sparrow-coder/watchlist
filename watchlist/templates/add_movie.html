@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+<!-- 在<head>标签中添加以下行 -->
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" type="text/css">
+{% block content %}
+{% if current_user.is_authenticated %}
+<form method="post" class="form-container">
+    <div class="form-row">
+        电影名 <input type="text" name="title" autocomplete="off" required class="long-input">
+        上映年份 <input type="text" name="year" autocomplete="off" required class="short-input year-input">
+        上映日期 <input type="text" name="date" autocomplete="off" required class="long-input">
+    </div>
+    <div class="form-row">
+    国家 <input type="text" name="country" autocomplete="off" required class="mid-input">
+    类型 <input type="text" name="type" autocomplete="off" required class="short-input">
+    票房 <input type="text" name="box" autocomplete="off" required class="short-input">
+    <input class="btn" type="submit" name="submit" value="录入">
+</div>
+</form>
+<a href="{{ url_for('index') }}" class="btn">取消录入</a>
+{% endif %}
+{% endblock %}

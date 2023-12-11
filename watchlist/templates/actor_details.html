@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="content">
+<h2>{{ actor.actor_name }} </h2>
+
+<p>国籍：{{ actor.nationality }}</p>
+
+<p>导演电影：
+    {% for movie_director in movie_directors %}
+        {{ movie_director.title }}
+        {% if not loop.last %} | {% endif %}
+    {% endfor %}
+</p>
+
+<p>主演电影：
+    {% for movie_main_actor in movie_main_actors %}
+        {{ movie_main_actor.title }}
+        {% if not loop.last %} | {% endif %}
+    {% endfor %}
+</p>
+
+<a class="豆瓣" href="https://www.bing.com/search?q={{ actor.actor_name }}">Bing</a>
+
+<div>
+{% endblock %}

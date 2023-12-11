@@ -8,6 +8,8 @@ from watchlist.commands import forge, initdb
 class WatchlistTestCase(unittest.TestCase):
 
     def setUp(self):
+        self.app_context = app.app_context()
+        self.app_context.push()
         app.config.update(
             TESTING=True,
             SQLALCHEMY_DATABASE_URI='sqlite:///:memory:'

@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="content">
+  <h2>{{ movie.title }}</h2>
+  <p><strong>年份：</strong> {{ movie.year }}</p>
+  <p><strong>上映日期：</strong> {{ movie.date }}</p>
+  <p><strong>国家：</strong> {{ movie.country }}</p>
+  <p><strong>类型：</strong> {{ movie.type }}</p>
+  <p><strong>票房：</strong> {{ movie.box }}亿</p>
+
+  <h2>导演：</h2>
+    <ul>
+        {% if director %}
+        <li class="actor-item">
+            {{ director.actor_name }} ({{director.nationality}})
+            {% set actor_link = url_for('movie_details', movie_id=director.actor_id) %}
+            <a class="豆瓣" href="https://www.douban.com/search?q={{ director.actor_name }}">豆瓣</a>
+        </li>
+        {% else %}
+            <li>暂未找到导演信息</li>
+        {% endif %}
+    </ul>
+
+  <h2>主演：</h2>
+    <ul>
+      {% if main_actors %}
+        {% for main_actor in main_actors %}
+          <li class="actor-item">
+            {{ main_actor.actor_name }} ({{main_actor.nationality}})
+            {% set actor_link = url_for('movie_details', movie_id=main_actor.actor_id) %}
+            <a class="豆瓣" href="https://www.douban.com/search?q={{ main_actor.actor_name }}">豆瓣</a>
+          </li>
+        {% endfor %}
+      {% else %}
+        <li>暂未找到主演信息</li>
+      {% endif %}
+    </ul>
+
+<a href="{{ url_for('index') }}" class="btn">返回电影列表</a>
+<div>
+{% endblock %}

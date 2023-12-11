@@ -1,10 +1,21 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h3>Edit item</h3>
-<form method="post">
-    Name <input type="text" name="title" autocomplete="off" required value="{{ movie.title }}">
-    Year <input type="text" name="year" autocomplete="off" required value="{{ movie.year }}">
-    <input class="btn" type="submit" name="submit" value="Update">
-</form>
+<div class="content">
+  <h3>编辑电影条目</h3>
+  <form method="post" class="form-container">
+    <div class="form-row">
+        电影名 <input type="text" name="title" autocomplete="off" required value="{{ movie.title }}" class="long-input">
+        上映年份 <input type="text" name="year" autocomplete="off" required value="{{ movie.year }}" class="short-input year-input">
+        上映日期 <input type="text" name="date" autocomplete="off" required value="{{ movie.date }}" class="long-input">
+    </div>
+    <div class="form-row">
+    国家 <input type="text" name="country" autocomplete="off" required value="{{ movie.country }}" class="mid-input">
+    类型 <input type="text" name="type" autocomplete="off" required value="{{ movie.type }}" class="short-input">
+    票房 <input type="text" name="box" autocomplete="off" required value="{{ movie.box }}" class="short-input">
+    <input class="btn" type="submit" name="submit" value="完成编辑">
+    </div>
+  </form>
+  <a href="{{ url_for('index') }}" class="btn">取消编辑</a>
+<div>
 {% endblock %}

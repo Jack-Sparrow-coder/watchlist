@@ -1,9 +1,14 @@
 /* 页面整体 */
 body {
     margin: auto;
-    max-width: 580px;
+    max-width: 800px;
     font-size: 14px;
     font-family: Helvetica, Arial, sans-serif;
+    background-image: url('{{ url_for('static', filename='images/background.jpg')}}'); /* 请替换为你的图片路径 */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed; /* 将背景图片设置为固定 */
 }
 
 /* 页脚 */
@@ -14,37 +19,130 @@ footer {
     padding: 10px;
 }
 
+.header {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-top: 8px;
+}
+
+.btn-container
+{
+    margin-left:100px;
+}
+
+.btn-container a.btn {
+    white-space: nowrap; /* 防止按钮换行 */
+}
+
+.sort-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.search-container,
+.filter-form {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.search-container,
+.filter-form {
+    flex-grow: 1;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 10px;
+}
+
+.search-container form,
+.filter-form {
+    margin-right: 10px;  /* 根据需要调整数值 */
+}
+
+.search-input {
+    width: 35%;  /* 调整为适当的百分比 */
+    height: 20px;
+    opacity: 0.7;
+    margin-right: 10px;
+}
+
+
+.entry-count {
+    display: inline-block;
+    border: 1px solid #555555;
+    padding: 5px 10px;
+    border-radius: 5px;
+    background-color: rgba(255, 200, 100, 0.3);
+    margin:0;
+}
+
 /* 头像 */
 .avatar {
     width: 40px;
 }
 
+.float-right {
+    float: right;
+}
+
+/* 排序按钮 */
+.sort-buttons-container {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.sort-button {
+    display: inline-block;
+    padding: 5px 12px;
+    margin: 5px;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: bold;
+    color: #8B4513; /* 棕色 */
+    background-color: #E6D9AF;
+    border: none; /* 去掉外边框 */
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.sort-button:hover {
+    background-color: #C0AB77;
+}
+
+
 /* 电影列表 */
 .movie-list {
-    list-style-type: none;
-    padding: 0;
-    margin-bottom: 10px;
-    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+    list-style-type: none;  /* 去掉列表项的默认标志*/
+    padding: 0;  /* 移除列表的内边距 */
+    margin-bottom: 10px;  /* 在列表下方添加一些外边距 */
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);  /* 添加一个阴影效果，使得列表看起来有一些立体感 */
 }
 
 .movie-list li {
-    padding: 12px 24px;
-    border-bottom: 1px solid #ddd;
+    padding: 12px 24px;  /* 设置列表项的内边距，增加上下间距 */
+    border-bottom: 1px solid #ddd;  /* 为列表项添加底部边框，形成分隔线 */
+    background-color: rgba(255, 255, 255, 0.5); /* 调整最后一个参数，0表示完全透明，1表示完全不透明 */
 }
 
 .movie-list li:last-child {
-    border-bottom:none;
+    border-bottom:none;  /* 移除最后一个列表项的底部边框，避免在列表底部多余的分隔线。 */
 }
 
 .movie-list li:hover {
-    background-color: #f8f9fa;
+    background-color: #f8f9fa;  /* 当鼠标悬停在列表项上时，改变背景颜色，提供视觉反馈 */
 }
 
 /* 龙猫图片 */
 .totoro {
+    position: absolute;
+    top: 10px; /* 距离顶部的距离，根据需要调整 */
+    right: 10px; /* 距离右侧的距离，根据需要调整 */
+    height: 100px;
     display: block;
     margin: 0 auto;
-    height: 100px;
+    opacity: 0.5;  /* 透明度 */
 }
 
 /* 导航栏 */
@@ -69,7 +167,7 @@ nav li a {
 }
 
 nav li a:hover {
-    background-color: #111;
+    background-color: #111;  /* 当鼠标悬停在列表项上时，改变背景颜色，提供视觉反馈 */
 }
 
 /* 链接 */
@@ -77,7 +175,7 @@ nav li a:hover {
     float: right;
 }
 
-.imdb {
+.豆瓣 {
     font-size: 12px;
     font-weight: bold;
     color: black;
@@ -100,22 +198,64 @@ input[name=year] {
     width: 50px;
 }
 
+/* 录入或编辑条目时 */
+.form-container {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px; /* 调整这个值以改变上方的间距 */
+}
+
+.form-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start; /* 将 align-items 设置为 flex-start */
+    margin-bottom: 10px;    /* 为了增加行与行之间的间距 */
+}
+
+/* 设置输入框的样式 */
+.form-row input {
+    padding: 3px 5px;
+}
+
+.form-row .short-input {
+    width: 50px;  /* 调整你想要的宽度 */
+    opacity: 0.7;
+}
+
+.form-row .mid-input {
+    width: 80px;  /* 调整你想要的宽度 */
+    opacity: 0.7;
+}
+
+.form-row .long-input {
+    width: 120px;  /* 调整你想要的宽度 */
+    opacity: 0.7;
+}
+
+/* 添加空白字符使得上映年份与类型左对齐 */
+.form-row .year-input::before {
+    content: '\00a0 \00a0'; /* 占位符，也可以使用空格 '\0020' */
+}
+
 .btn {
     font-size: 12px;
-    padding: 3px 5px;
+    padding: 2px 4px;
     text-decoration: none;
     cursor: pointer;
     background-color: white;
     color: black;
-    border: 1px solid #555555;
+    border: 2px solid #555555;
     border-radius: 5px;
+    display: inline-block;
+    min-width: 20px; /* 设置按钮的最小宽度，根据需要调整 */
+    opacity: 0.9; /* 设置为不透明 */
 }
 
 .btn:hover {
     text-decoration: none;
     background-color: black;
     color: white;
-    border: 1px solid black;
+    border: 2px solid black;
 }
 
 /* 提示消息增加样式 */
@@ -132,5 +272,70 @@ input[name=year] {
 
 /* 让表单中的删除按钮和旁边的编辑链接排成一行 */
 .inline-form {
-    display: inline;
+    display: inline;  /* 使内联表单水平排列，不占据整行空间 */
 }
+
+.pagination {  /* 应用于包含页码和按钮的容器 */
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+    text-align: center;
+}
+
+.pagination a, /* 应用于每个页码和按钮 */
+.pagination span {
+    display: inline-block;
+    padding: 8px 12px;
+    margin: 2px;
+    border: 1px solid #ddd;
+    text-decoration: none;
+    color: #333;
+    border-radius: 4px;
+    background-color: #D2B48C;
+}
+
+.pagination .current-page {  /* 用于突出显示当前页 */
+    background-color: rgba(255, 200, 100, 1);
+    color: #fff;
+}
+
+.pagination a:hover {   /* 当鼠标悬停在列表项上时，改变背景颜色，提供视觉反馈 */
+    background-color: #ddd;
+}
+
+.pagination .disabled {  /* 用于禁用“上一页”或“下一页”按钮 */
+    pointer-events: none;
+    background-color: #eee;
+    color: #888;
+}
+
+/* 页面内容区域 */
+.content {
+    background-color: rgba(255, 255, 255, 0.6); /* 以白色为背景，设置透明度为0.9 */
+    padding: 20px;
+    border-radius: 10px; /* 可根据需要调整圆角大小 */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* 添加一些阴影效果，使得内容突显 */
+}
+
+/* 导演和主演的样式，根据需要调整 */
+.actor-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    line-height: 2;
+}
+
+.actor-item a {
+    height: 15px;
+    line-height: 15px;
+    /* 添加其他样式，比如背景色、边框等 */
+}
+
+
+
+
+
+
+
+
+
